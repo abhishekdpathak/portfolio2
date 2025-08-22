@@ -2247,3 +2247,66 @@ footer {
   align-items: center;
   gap: 0.25rem;
 }
+
+/* --- About layout update (text left, image right; numbers under text) --- */
+#about .about-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+@media (min-width: 1024px) {
+  #about .about-content {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: start;
+  }
+}
+#about .about-text {
+  text-align: left;
+  max-width: 65ch;
+  margin: 0;
+}
+#about .stats {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 480px) {
+  #about .stats { grid-template-columns: 1fr; }
+}
+#about .stat-card {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid var(--slate-700);
+  border-radius: 0.75rem;
+}
+#about .stat-card .number {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+#about .stat-card .label { font-size: 0.9rem; color: var(--slate-300); }
+#about .photo-wrapper {
+  position: relative;
+  max-width: 22rem;
+  margin: 0 auto;
+  border: 4px solid rgba(16, 185, 129, 0.2);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+#about .photo-wrapper:hover { transform: scale(1.03); }
+#about .photo-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+#about .decorative.one {
+  position: absolute; top: -1rem; right: -1rem;
+  width: 6rem; height: 6rem; border-radius: 50%;
+  background: rgba(16,185,129,.2); filter: blur(30px);
+}
+#about .decorative.two {
+  position: absolute; bottom: -1rem; left: -1rem;
+  width: 8rem; height: 8rem; border-radius: 50%;
+  background: rgba(59,130,246,.1); filter: blur(30px);
+}

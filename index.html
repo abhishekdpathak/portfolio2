@@ -187,59 +187,116 @@
   </section>
 
   <!-- About Section -->
-  <section id="about">
-    <!-- Floating particles for the about section -->
-    <div class="bg-particles">
-      <div class="floating-element floating-hexagon float-2 emerald" style="top:5%; left:5%;"></div>
-      <div class="floating-element floating-circle float-4 blue" style="top:15%; right:10%; width:22px; height:22px;"></div>
-      <div class="floating-element floating-square float-1 purple" style="bottom:20%; left:15%; width:18px; height:18px;"></div>
-      <div class="floating-element floating-triangle float-5 emerald" style="bottom:10%; right:5%;"></div>
-      <div class="floating-element floating-circle float-3 yellow" style="top:70%; left:80%; width:20px; height:20px;"></div>
-    </div>
-    <div class="container">
-      <h2 class="section-title">About <span>Me</span></h2>
+  <section id="about" class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>About <span class="accent">Me</span></h2>
+      <div class="section-underline"></div>
       <p class="section-subtitle">Marketing Professional with a Passion for Results</p>
-      <div class="section-divider"></div>
-      <div class="about-grid">
-        <!-- Image with decorative blur -->
-        <div class="about-photo">
-          <div class="photo-wrapper">
-            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NTU4ODYxNTB8MA&ixlib=rb-4.1.0&q=85" alt="Abhishek Pathak portrait">
+    </div>
+
+    <!-- 2-col layout: text left, image right -->
+    <div class="about-content">
+      <!-- Text column -->
+      <div class="about-text">
+        <h3>Marketing Professional with a Passion for Results</h3>
+
+        <p>
+          With over 5 years of experience in the marketing sector, I am a dedicated professional
+          with extensive knowledge of marketing tactics, consumer engagement, and business development.
+          My expertise spans across digital marketing, campaign management, and strategic planning.
+        </p>
+        <p>
+          I specialize in analyzing market trends and developing comprehensive marketing strategies
+          that drive customer acquisition, retention, and loyalty. My approach combines creative
+          thinking with data-driven insights to deliver powerful campaigns that exceed expectations.
+        </p>
+        <p>
+          My educational background includes a Diploma in Business Administration with a Major in
+          Marketing, complemented by an Engineering degree that provides me with analytical and
+          problem-solving skills that enhance my marketing strategies.
+        </p>
+
+        <!-- Number boxes live directly under the text -->
+        <div class="stats">
+          <div class="stat-card">
+            <div class="number accent">10+</div>
+            <div class="label">Product Categories</div>
           </div>
-          <div class="blur-circle emerald"></div>
-          <div class="blur-circle-blue"></div>
-        </div>
-        <!-- About text and stats -->
-        <div class="about-content">
-          <div class="about-text">
-            <p>
-              With over 5 years of experience in the marketing sector, I am a dedicated professional with extensive knowledge of
-              marketing tactics, consumer engagement, and business development. My expertise spans across digital marketing,
-              campaign management, and strategic planning.
-            </p>
-            <p>
-              I specialize in analyzing market trends and developing comprehensive marketing strategies that drive customer
-              acquisition, retention, and loyalty. My approach combines creative thinking with data‑driven insights to deliver
-              powerful campaigns that exceed expectations.
-            </p>
-            <p>
-              My educational background includes a Diploma in Business Administration with a Major in Marketing, complemented
-              by an Engineering degree that provides me with analytical and problem‑solving skills that enhance my marketing
-              strategies.
-            </p>
-          </div>
-          <div class="about-stats">
-            <div class="stat-card">
-              <div class="number emerald">10+</div>
-              <div class="label">Product Categories</div>
-            </div>
-            <div class="stat-card">
-              <div class="number blue">3+</div>
-              <div class="label">Major Campaigns</div>
-            </div>
+          <div class="stat-card">
+            <div class="number blue">3+</div>
+            <div class="label">Major Campaigns</div>
           </div>
         </div>
       </div>
+
+      <!-- Image column (right) -->
+      <div class="photo-wrapper">
+        <img
+          src="https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85"
+          alt="Abhishek Pathak - Marketing Professional"
+        />
+        <span class="decorative one"></span>
+        <span class="decorative two"></span>
+      </div>
+    </div>
+
+    <!-- Highlights row (unchanged) -->
+    <div class="highlight-grid">
+      <div class="highlight-card">
+        <div class="icon-wrapper"><svg class="icon-24"><use href="#fa-award" /></svg></div>
+        <h4>Proven Results</h4>
+        <p>5+ years delivering measurable marketing outcomes with 20–40% performance improvements</p>
+      </div>
+      <div class="highlight-card">
+        <div class="icon-wrapper"><svg class="icon-24"><use href="#fa-bullseye" /></svg></div>
+        <h4>Strategic Focus</h4>
+        <p>Data-driven approach to campaign planning and execution with emphasis on ROI optimization</p>
+      </div>
+      <div class="highlight-card">
+        <div class="icon-wrapper"><svg class="icon-24"><use href="#fa-users" /></svg></div>
+        <h4>Leadership</h4>
+        <p>Experienced in team management, mentorship, and cross-functional collaboration</p>
+      </div>
+      <div class="highlight-card">
+        <div class="icon-wrapper"><svg class="icon-24"><use href="#fa-arrow-trend-up" /></svg></div>
+        <h4>Growth Oriented</h4>
+        <p>Consistently achieved significant increases in brand awareness, engagement, and conversions</p>
+      </div>
+    </div>
+
+    <!-- Education row (unchanged) -->
+    <div class="education-grid">
+      <div class="education-card">
+        <h4 class="accent">Education</h4>
+        <div class="edu-block">
+          <h5>Business Administration - Marketing</h5>
+          <div class="institution">Southern Alberta Institute of Technology</div>
+          <p>Specialized in Brand Management, Market Research, Marketing Strategies, and Consumer Behavior</p>
+        </div>
+        <div class="edu-block">
+          <h5>Bachelor of Engineering</h5>
+          <div class="institution">Marwadi University</div>
+          <p>Technical foundation in Project Management, Operations, and Analytical Problem-Solving</p>
+        </div>
+      </div>
+
+      <div class="education-card">
+        <h4 class="blue">Core Competencies</h4>
+        <div class="competency-list">
+          <div class="item"><span class="dot"></span>Marketing Strategy & Campaign Planning</div>
+          <div class="item"><span class="dot"></span>Digital Marketing & SEO/SEM</div>
+          <div class="item"><span class="dot"></span>Social Media Management</div>
+          <div class="item"><span class="dot"></span>Email Marketing & Automation</div>
+          <div class="item"><span class="dot"></span>Data Analysis & Performance Optimization</div>
+          <div class="item"><span class="dot"></span>Brand Management & Content Creation</div>
+          <div class="item"><span class="dot"></span>Team Leadership & Project Coordination</div>
+          <div class="item"><span class="dot"></span>Market Research & Consumer Insights</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
       <!-- Highlights -->
       <div class="highlight-grid">
         <div class="highlight-card">
