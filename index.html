@@ -1,0 +1,809 @@
+<!--
+  index.html
+
+  This is the consolidated, static version of the marketing portfolio
+  website.  It embeds all markup needed to display the site using a
+  single HTML file alongside a separate stylesheet (styles.css) and
+  JavaScript file (script.js).  Icons from Font‑Awesome are included
+  inline via <symbol> elements to avoid external requests.  Each
+  section of the original React application has been re‑created here
+  with semantic HTML and utility classes defined in styles.css.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abhishek Pathak – Marketing Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Inline icon definitions.  These symbols are referenced throughout
+       the document via <use href="#icon‑name"></use>.  The path data was
+       extracted from the Font‑Awesome Free 6.7.2 library. -->
+  <svg style="display:none" aria-hidden="true" focusable="false">
+    <symbol id="icon-envelope" viewBox="0 0 512 512">
+      <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
+    </symbol>
+    <symbol id="icon-phone" viewBox="0 0 512 512">
+      <path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z" />
+    </symbol>
+    <symbol id="icon-location" viewBox="0 0 384 512">
+      <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
+    </symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 448 512">
+      <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
+    </symbol>
+    <symbol id="icon-award" viewBox="0 0 512 512">
+      <path d="M173.8 5.5c11-7.3 25.4-7.3 36.4 0L228 17.2c6 3.9 13 5.8 20.1 5.4l21.3-1.3c13.2-.8 25.6 6.4 31.5 18.2l9.6 19.1c3.2 6.4 8.4 11.5 14.7 14.7L344.5 83c11.8 5.9 19 18.3 18.2 31.5l-1.3 21.3c-.4 7.1 1.5 14.2 5.4 20.1l11.8 17.8c7.3 11 7.3 25.4 0 36.4L366.8 228c-3.9 6-5.8 13-5.4 20.1l1.3 21.3c.8 13.2-6.4 25.6-18.2 31.5l-19.1 9.6c-6.4 3.2-11.5 8.4-14.7 14.7L301 344.5c-5.9 11.8-18.3 19-31.5 18.2l-21.3-1.3c-7.1-.4-14.2 1.5-20.1 5.4l-17.8 11.8c-11 7.3-25.4 7.3-36.4 0L156 366.8c-6-3.9-13-5.8-20.1-5.4l-21.3 1.3c-13.2 .8-25.6-6.4-31.5-18.2l-9.6-19.1c-3.2-6.4-8.4-11.5-14.7-14.7L39.5 301c-11.8-5.9-19-18.3-18.2-31.5l1.3-21.3c.4-7.1-1.5-14.2-5.4-20.1L5.5 210.2c-7.3-11-7.3-25.4 0-36.4L17.2 156c3.9-6 5.8-13 5.4-20.1l-1.3-21.3c-.8-13.2 6.4-25.6 18.2-31.5l19.1-9.6C65 70.2 70.2 65 73.4 58.6L83 39.5c5.9-11.8 18.3-19 31.5-18.2l21.3 1.3c7.1 .4 14.2-1.5 20.1-5.4L173.8 5.5zM272 192a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM1.3 441.8L44.4 339.3c.2 .1 .3 .2 .4 .4l9.6 19.1c11.7 23.2 36 37.3 62 35.8l21.3-1.3c.2 0 .5 0 .7 .2l17.8 11.8c5.1 3.3 10.5 5.9 16.1 7.7l-37.6 89.3c-2.3 5.5-7.4 9.2-13.3 9.7s-11.6-2.2-14.8-7.2L74.4 455.5l-56.1 8.3c-5.7 .8-11.4-1.5-15-6s-4.3-10.7-2.1-16zm248 60.4L211.7 413c5.6-1.8 11-4.3 16.1-7.7l17.8-11.8c.2-.1 .4-.2 .7-.2l21.3 1.3c26 1.5 50.3-12.6 62-35.8l9.6-19.1c.1-.2 .2-.3 .4-.4l43.2 102.5c2.2 5.3 1.4 11.4-2.1 16s-9.3 6.9-15 6l-56.1-8.3-32.2 49.2c-3.2 5-8.9 7.7-14.8 7.2s-11-4.3-13.3-9.7z" />
+    </symbol>
+    <symbol id="icon-bullseye" viewBox="0 0 512 512">
+      <path d="M448 256A192 192 0 1 0 64 256a192 192 0 1 0 384 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 80a80 80 0 1 0 0-160 80 80 0 1 0 0 160zm0-224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zM224 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z" />
+    </symbol>
+    <symbol id="icon-users" viewBox="0 0 640 512">
+      <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z" />
+    </symbol>
+    <symbol id="icon-arrow-trend-up" viewBox="0 0 640 512">
+      <path d="M384 160c-17.7 0-32-14.3-32-32s14.3-32 32-32l160 0c17.7 0 32 14.3 32 32l0 160c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-82.7L342.6 374.6c-12.5 12.5-32.8 12.5-45.3 0L192 269.3 54.6 406.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160c12.5-12.5 32.8-12.5 45.3 0L320 306.7 466.7 160 384 160z" />
+    </symbol>
+    <symbol id="icon-circle-check" viewBox="0 0 512 512">
+      <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
+    </symbol>
+    <symbol id="icon-calendar" viewBox="0 0 448 512">
+      <path d="M96 32l0 32L48 64C21.5 64 0 85.5 0 112l0 48 448 0 0-48c0-26.5-21.5-48-48-48l-48 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32L160 64l0-32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192L0 192 0 464c0 26.5 21.5 48 48 48l352 0c26.5 0 48-21.5 48-48l0-272z" />
+    </symbol>
+    <symbol id="icon-chart-bar" viewBox="0 0 512 512">
+      <path d="M32 32c17.7 0 32 14.3 32 32l0 336c0 8.8 7.2 16 16 16l400 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L80 480c-44.2 0-80-35.8-80-80L0 64C0 46.3 14.3 32 32 32zm96 96c0-17.7 14.3-32 32-32l192 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-192 0c-17.7 0-32-14.3-32-32zm32 64l128 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-128 0c-17.7 0-32-14.3-32-32s14.3-32 32-32zm0 96l256 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-256 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
+    </symbol>
+    <symbol id="icon-code" viewBox="0 0 640 512">
+      <path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z" />
+    </symbol>
+    <symbol id="icon-bars" viewBox="0 0 448 512">
+      <path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+    </symbol>
+    <symbol id="icon-xmark" viewBox="0 0 512 512">
+      <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </symbol>
+    <symbol id="icon-arrow-up" viewBox="0 0 448 512">
+      <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2 160 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-306.7L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" />
+    </symbol>
+    <symbol id="icon-heart" viewBox="0 0 512 512">
+      <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+    </symbol>
+    <symbol id="icon-external-link" viewBox="0 0 512 512">
+      <path d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z" />
+    </symbol>
+  </svg>
+</head>
+<body>
+  <!-- Header with navigation -->
+  <header>
+    <div class="container nav-container">
+      <div class="brand">Abhishek&nbsp;Pathak</div>
+      <nav class="nav-links">
+        <button data-target="home">Home</button>
+        <button data-target="about">About</button>
+        <button data-target="skills">Skills</button>
+        <button data-target="experience">Experience</button>
+        <button data-target="projects">Projects</button>
+        <button data-target="contact">Contact</button>
+      </nav>
+      <!-- Mobile hamburger -->
+      <button class="hamburger" aria-label="Toggle menu">
+        <svg class="icon icon-bars">
+          <use href="#icon-bars"></use>
+        </svg>
+        <svg class="icon icon-close">
+          <use href="#icon-xmark"></use>
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile navigation menu -->
+    <div class="mobile-menu">
+      <button data-target="home">Home</button>
+      <button data-target="about">About</button>
+      <button data-target="skills">Skills</button>
+      <button data-target="experience">Experience</button>
+      <button data-target="projects">Projects</button>
+      <button data-target="contact">Contact</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home">
+    <!-- Floating shapes to create subtle motion background -->
+    <div class="bg-particles">
+      <div class="floating-element floating-circle float-1 emerald" style="top:10%; left:10%; width:20px; height:20px;"></div>
+      <div class="floating-element floating-square float-2 blue" style="top:20%; right:15%; width:18px; height:18px;"></div>
+      <div class="floating-element floating-triangle float-3 purple" style="bottom:30%; left:8%;"></div>
+      <div class="floating-element floating-hexagon float-4 emerald" style="top:60%; right:20%;"></div>
+      <div class="floating-element floating-circle float-5 yellow" style="bottom:15%; right:10%; width:22px; height:22px;"></div>
+      <div class="floating-element floating-square float-1 blue" style="top:80%; left:20%; width:18px; height:18px;"></div>
+      <div class="floating-element floating-triangle float-2 emerald" style="top:15%; left:70%;"></div>
+      <div class="floating-element floating-circle float-3 purple" style="bottom:60%; right:8%; width:22px; height:22px;"></div>
+    </div>
+    <!-- Background gradient blur circles -->
+    <div class="background-blur">
+      <div class="circle one"></div>
+      <div class="circle two"></div>
+    </div>
+    <div class="container hero-content">
+      <div>
+        <h1 class="text-gradient" style="font-size:3.5rem; font-weight:bold; line-height:1.1; margin-bottom:1rem;">
+          <span class="emerald">Marketing</span><br>
+          Strategist
+        </h1>
+        <p style="font-size:1.125rem; color:var(--slate-300); margin-bottom:2rem; max-width:32rem;">
+          Transforming brands through data‑driven campaigns and innovative marketing strategies. 5+ years of proven
+          expertise in digital marketing, campaign management, and business development.
+        </p>
+        <!-- Contact info quick links -->
+        <div style="display:flex; flex-direction:column; gap:0.75rem; margin-bottom:2rem; font-size:0.875rem; color:var(--slate-300);">
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <svg class="icon small emerald"><use href="#icon-envelope"></use></svg>
+            <span>abhishekpathak1497@gmail.com</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <svg class="icon small emerald"><use href="#icon-phone"></use></svg>
+            <span>+1&nbsp;(587)&nbsp;434‑9045</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <svg class="icon small emerald"><use href="#icon-location"></use></svg>
+            <span>Calgary&nbsp;(Open to relocate)</span>
+          </div>
+        </div>
+        <!-- Call‑to‑action buttons -->
+        <div style="display:flex; flex-direction:column; gap:1rem; max-width:22rem;">
+          <button id="cta-button" class="button button-primary">View My Work</button>
+          <button data-target="contact" class="button button-outline">Get In Touch</button>
+        </div>
+      </div>
+      <!-- Achievements -->
+      <div class="achievements-grid">
+        <div class="achievement-card">
+          <div class="number emerald">5+</div>
+          <div class="label">Years&nbsp;Experience</div>
+        </div>
+        <div class="achievement-card">
+          <div class="number blue">40%</div>
+          <div class="label">Brand Awareness Increase</div>
+        </div>
+        <div class="achievement-card">
+          <div class="number purple">20%</div>
+          <div class="label">Email Open Rate Boost</div>
+        </div>
+        <div class="achievement-card">
+          <div class="number yellow">15%</div>
+          <div class="label">Content Engagement Growth</div>
+        </div>
+      </div>
+    </div>
+    <!-- Scroll indicator arrow -->
+    <div style="position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);" class="animate-bounce">
+      <button data-target="about" aria-label="Scroll Down" style="background:none; border:none; cursor:pointer; color:var(--emerald);">
+        <svg class="icon" style="width:2rem; height:2rem;">
+          <use href="#icon-chevron-down"></use>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <!-- Floating particles for the about section -->
+    <div class="bg-particles">
+      <div class="floating-element floating-hexagon float-2 emerald" style="top:5%; left:5%;"></div>
+      <div class="floating-element floating-circle float-4 blue" style="top:15%; right:10%; width:22px; height:22px;"></div>
+      <div class="floating-element floating-square float-1 purple" style="bottom:20%; left:15%; width:18px; height:18px;"></div>
+      <div class="floating-element floating-triangle float-5 emerald" style="bottom:10%; right:5%;"></div>
+      <div class="floating-element floating-circle float-3 yellow" style="top:70%; left:80%; width:20px; height:20px;"></div>
+    </div>
+    <div class="container">
+      <h2 class="section-title">About <span>Me</span></h2>
+      <p class="section-subtitle">Marketing Professional with a Passion for Results</p>
+      <div class="section-divider"></div>
+      <div class="about-grid">
+        <!-- Image with decorative blur -->
+        <div class="about-photo">
+          <div class="photo-wrapper">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NTU4ODYxNTB8MA&ixlib=rb-4.1.0&q=85" alt="Abhishek Pathak portrait">
+          </div>
+          <div class="blur-circle emerald"></div>
+          <div class="blur-circle-blue"></div>
+        </div>
+        <!-- About text and stats -->
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              With over 5 years of experience in the marketing sector, I am a dedicated professional with extensive knowledge of
+              marketing tactics, consumer engagement, and business development. My expertise spans across digital marketing,
+              campaign management, and strategic planning.
+            </p>
+            <p>
+              I specialize in analyzing market trends and developing comprehensive marketing strategies that drive customer
+              acquisition, retention, and loyalty. My approach combines creative thinking with data‑driven insights to deliver
+              powerful campaigns that exceed expectations.
+            </p>
+            <p>
+              My educational background includes a Diploma in Business Administration with a Major in Marketing, complemented
+              by an Engineering degree that provides me with analytical and problem‑solving skills that enhance my marketing
+              strategies.
+            </p>
+          </div>
+          <div class="about-stats">
+            <div class="stat-card">
+              <div class="number emerald">10+</div>
+              <div class="label">Product Categories</div>
+            </div>
+            <div class="stat-card">
+              <div class="number blue">3+</div>
+              <div class="label">Major Campaigns</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Highlights -->
+      <div class="highlight-grid">
+        <div class="highlight-card">
+          <div class="icon-wrapper">
+            <svg class="icon"><use href="#icon-award"></use></svg>
+          </div>
+          <h4>Proven Results</h4>
+          <p>5+ years delivering measurable marketing outcomes with 20‑40% performance improvements</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon-wrapper">
+            <svg class="icon"><use href="#icon-bullseye"></use></svg>
+          </div>
+          <h4>Strategic Focus</h4>
+          <p>Data‑driven approach to campaign planning and execution with emphasis on ROI optimization</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon-wrapper">
+            <svg class="icon"><use href="#icon-users"></use></svg>
+          </div>
+          <h4>Leadership</h4>
+          <p>Experienced in team management, mentorship, and cross‑functional collaboration</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon-wrapper">
+            <svg class="icon"><use href="#icon-arrow-trend-up"></use></svg>
+          </div>
+          <h4>Growth Oriented</h4>
+          <p>Consistently achieved significant increases in brand awareness, engagement and conversions</p>
+        </div>
+      </div>
+      <!-- Education & Competencies -->
+      <div class="education-grid">
+        <div class="education-card">
+          <h4 class="education-title emerald">Education</h4>
+          <div class="education-item">
+            <h5>Business Administration – Marketing</h5>
+            <p class="school emerald">Southern Alberta Institute of Technology</p>
+            <p class="description">Specialized in Brand Management, Market Research, Marketing Strategies, and Consumer Behavior</p>
+          </div>
+          <div class="education-item">
+            <h5>Bachelor of Engineering</h5>
+            <p class="school emerald">Marwadi University</p>
+            <p class="description">Technical foundation in Project Management, Operations, and Analytical Problem‑Solving</p>
+          </div>
+        </div>
+        <div class="education-card">
+          <h4 class="education-title blue">Core Competencies</h4>
+          <ul class="competencies">
+            <li>Marketing Strategy &amp; Campaign Planning</li>
+            <li>Digital Marketing &amp; SEO/SEM</li>
+            <li>Social Media Management</li>
+            <li>Email Marketing &amp; Automation</li>
+            <li>Data Analysis &amp; Performance Optimization</li>
+            <li>Brand Management &amp; Content Creation</li>
+            <li>Team Leadership &amp; Project Coordination</li>
+            <li>Market Research &amp; Consumer Insights</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="bg-particles">
+      <div class="floating-element floating-triangle float-1 emerald" style="top:8%; left:12%;"></div>
+      <div class="floating-element floating-square float-3 blue" style="top:25%; right:8%; width:18px; height:18px;"></div>
+      <div class="floating-element floating-circle float-5 purple" style="bottom:25%; left:6%; width:22px; height:22px;"></div>
+      <div class="floating-element floating-hexagon float-2 emerald" style="bottom:8%; right:12%;"></div>
+      <div class="floating-element floating-circle float-4 yellow" style="top:60%; left:85%; width:20px; height:20px;"></div>
+      <div class="floating-element floating-square float-1 blue" style="top:40%; left:3%; width:18px; height:18px;"></div>
+    </div>
+    <div class="container">
+      <h2 class="section-title">Core <span>Skills</span></h2>
+      <p class="section-subtitle">A comprehensive skill set built through years of hands‑on experience in marketing, digital strategy, and team leadership across diverse industries and markets.</p>
+      <div class="skills-grid">
+        <!-- Marketing Strategy category -->
+        <div class="skill-card">
+          <div class="skill-header">
+            <svg class="icon emerald"><use href="#icon-bullseye"></use></svg>
+            <h3>Marketing Strategy</h3>
+          </div>
+          <div class="skill-list">
+            <div class="skill-row">
+              <span>Marketing Strategy &amp; Execution</span><span>95%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="95"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Campaign Planning</span><span>92%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="92"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Content Creation</span><span>90%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="90"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Brand Management</span><span>88%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="88"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Consumer Behavior Analysis</span><span>85%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="85"></div></div>
+            </div>
+          </div>
+        </div>
+        <!-- Digital Marketing category -->
+        <div class="skill-card">
+          <div class="skill-header">
+            <svg class="icon blue"><use href="#icon-chart-bar"></use></svg>
+            <h3>Digital Marketing</h3>
+          </div>
+          <div class="skill-list">
+            <div class="skill-row">
+              <span>SEO/SEM</span><span>90%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="90"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Social Media Management</span><span>95%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="95"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Email Marketing</span><span>92%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="92"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Google Analytics</span><span>88%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="88"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>A/B Testing</span><span>85%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="85"></div></div>
+            </div>
+          </div>
+        </div>
+        <!-- Technical category -->
+        <div class="skill-card">
+          <div class="skill-header">
+            <svg class="icon purple"><use href="#icon-code"></use></svg>
+            <h3>Technical Skills</h3>
+          </div>
+          <div class="skill-list">
+            <div class="skill-row">
+              <span>Adobe Creative Suite</span><span>88%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="88"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Salesforce/HubSpot</span><span>85%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="85"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Microsoft 365</span><span>90%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="90"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>HTML/CSS</span><span>75%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="75"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Data Analysis</span><span>85%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="85"></div></div>
+            </div>
+          </div>
+        </div>
+        <!-- Leadership category -->
+        <div class="skill-card">
+          <div class="skill-header">
+            <svg class="icon yellow"><use href="#icon-users"></use></svg>
+            <h3>Leadership</h3>
+          </div>
+          <div class="skill-list">
+            <div class="skill-row">
+              <span>Team Management</span><span>90%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="90"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Project Coordination</span><span>92%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="92"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Stakeholder Collaboration</span><span>88%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="88"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Strategic Planning</span><span>85%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="85"></div></div>
+            </div>
+            <div class="skill-row">
+              <span>Performance Optimization</span><span>87%</span>
+              <div class="progress-bar"><div class="progress-fill" data-level="87"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tools & Platforms -->
+      <h3 class="subsection-title">Professional <span>Tools &amp; Platforms</span></h3>
+      <div class="tools-grid">
+        <div>Adobe Creative Suite</div>
+        <div>Google Analytics</div>
+        <div>Salesforce</div>
+        <div>HubSpot</div>
+        <div>Microsoft&nbsp;365</div>
+        <div>Canva</div>
+        <div>Final&nbsp;Cut&nbsp;Pro</div>
+        <div>After&nbsp;Effects</div>
+        <div>ClickUp</div>
+        <div>Wrike</div>
+        <div>Affinity Designer</div>
+        <div>HTML/CSS</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience">
+    <div class="bg-particles">
+      <div class="floating-element floating-circle float-2 emerald" style="top:10%; left:8%; width:22px; height:22px;"></div>
+      <div class="floating-element floating-hexagon float-4 blue" style="top:30%; right:12%;"></div>
+      <div class="floating-element floating-square float-1 purple" style="bottom:30%; left:10%; width:18px; height:18px;"></div>
+      <div class="floating-element floating-triangle float-5 emerald" style="bottom:10%; right:8%;"></div>
+      <div class="floating-element floating-circle float-3 yellow" style="top:70%; left:88%; width:20px; height:20px;"></div>
+    </div>
+    <div class="container">
+      <h2 class="section-title">Professional <span>Experience</span></h2>
+      <p class="section-subtitle">A track record of delivering exceptional results across diverse marketing roles, consistently driving growth and innovation in every position.</p>
+      <!-- Timeline -->
+      <div class="timeline">
+        <!-- Experience entry 1 -->
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
+          <div class="timeline-dot emerald"></div>
+          <div class="timeline-content">
+            <h3>Email Marketing Advisor</h3>
+            <div class="meta">
+              <div class="meta-item"><svg class="icon small"><use href="#icon-calendar"></use></svg><span>2023&nbsp;–&nbsp;Present</span></div>
+              <div class="meta-item"><svg class="icon small"><use href="#icon-location"></use></svg><span>Calgary, Canada</span></div>
+            </div>
+            <h4>Key Achievements &amp; Responsibilities:</h4>
+            <ul class="achievements-list">
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Developed marketing strategies enhancing customer engagement and lead generation</li>
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Achieved 20% increase in email open rates through strategic campaign design</li>
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Provided mentorship and performance feedback to team members</li>
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Conducted A/B testing to refine messaging and improve customer response</li>
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Created comprehensive reports and dashboards for KPI tracking</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Experience entry 2 -->
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
+          <div class="timeline-dot emerald"></div>
+          <div class="timeline-content">
+            <h3>Social Media &amp; Marketing Specialist</h3>
+            <div class="meta">
+              <div class="meta-item"><svg class="icon small"><use href="#icon-calendar"></use></svg><span>2022&nbsp;–&nbsp;2023</span></div>
+              <div class="meta-item"><svg class="icon small"><use href="#icon-location"></use></svg><span>Calgary, Canada</span></div>
+            </div>
+            <h4>Key Achievements &amp; Responsibilities:</h4>
+            <ul class="achievements-list">
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Assisted in creation of diverse marketing content across multiple platforms</li>
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Conducted market research on competitors and customer preferences</li>
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Participated in contract negotiations and client relationship management</li>
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Analyzed email campaign performance and provided optimization recommendations</li>
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Supported proposal development and client presentations</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Experience entry 3 -->
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
+          <div class="timeline-dot emerald"></div>
+          <div class="timeline-content">
+            <h3>Digital Marketing Strategist</h3>
+            <div class="meta">
+              <div class="meta-item"><svg class="icon small"><use href="#icon-calendar"></use></svg><span>2020&nbsp;–&nbsp;2022</span></div>
+              <div class="meta-item"><svg class="icon small"><use href="#icon-location"></use></svg><span>Rajkot, India</span></div>
+            </div>
+            <h4>Key Achievements &amp; Responsibilities:</h4>
+            <ul class="achievements-list">
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Implemented go-to-market strategies resulting in 40% increase in brand awareness</li>
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Designed 3+ campaigns for multiple product categories globally</li>
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Drafted marketing materials including press releases and promotional content</li>
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Leveraged social media platforms achieving 40% increase in brand reach</li>
+              <li><svg class="icon small emerald"><use href="#icon-circle-check"></use></svg> Generated 15% increase in article views and social media engagement</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Impact Highlights -->
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="number emerald">20%</div>
+          <div class="label">Email Open Rate Increase</div>
+        </div>
+        <div class="impact-card">
+          <div class="number blue">40%</div>
+          <div class="label">Brand Awareness Growth</div>
+        </div>
+        <div class="impact-card">
+          <div class="number purple">15%</div>
+          <div class="label">Content Engagement Boost</div>
+        </div>
+        <div class="impact-card">
+          <div class="number yellow">10+</div>
+          <div class="label">Product Categories Managed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="bg-particles">
+      <div class="floating-element floating-square float-3 emerald" style="top:5%; left:15%; width:18px; height:18px;"></div>
+      <div class="floating-element floating-triangle float-1 blue" style="top:20%; right:10%;"></div>
+      <div class="floating-element floating-hexagon float-4 purple" style="bottom:20%; left:8%;"></div>
+      <div class="floating-element floating-circle float-2 emerald" style="bottom:5%; right:15%; width:22px; height:22px;"></div>
+      <div class="floating-element floating-square float-5 yellow" style="top:65%; left:90%; width:18px; height:18px;"></div>
+      <div class="floating-element floating-circle float-1 blue" style="top:45%; left:2%; width:22px; height:22px;"></div>
+    </div>
+    <div class="container">
+      <h2 class="section-title">Featured <span>Projects</span></h2>
+      <p class="section-subtitle">Showcasing strategic marketing initiatives and campaigns that delivered measurable results and drove significant business growth across various industries.</p>
+      <!-- Category filters -->
+      <div class="category-filter">
+        <button class="active" data-category="All">All</button>
+        <button data-category="Brand Strategy">Brand Strategy</button>
+        <button data-category="Product Marketing">Product Marketing</button>
+        <button data-category="Business Development">Business Development</button>
+        <button data-category="Innovation">Innovation</button>
+      </div>
+      <!-- Projects grid -->
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card" data-category="Brand Strategy">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHxtYXJrZXRpbmclMjBjYW1wYWlnbnxlbnwwfHx8fDE3NTU4NDY0MDV8MA&ixlib=rb-4.1.0&q=85" alt="Brand Management Campaign">
+            <span class="badge">Brand Strategy</span>
+          </div>
+          <div class="project-content">
+            <h3>Brand Management Campaign</h3>
+            <p>Designed comprehensive marketing campaign for salon business including customer feedback systems and brand awareness initiatives.</p>
+            <div class="results-section">
+              <h4><svg class="icon small emerald"><use href="#icon-award"></use></svg> Key Results</h4>
+              <ul>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Significantly increased customer base</li>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Enhanced brand visibility in local market</li>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Improved customer satisfaction scores</li>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Established data‑driven feedback loop</li>
+              </ul>
+            </div>
+            <div class="tech-section">
+              <h4>Skills &amp; Tools Utilized</h4>
+              <div class="tags">
+                <span>Marketing Analytics</span>
+                <span>Survey Design</span>
+                <span>Brand Strategy</span>
+                <span>Customer Research</span>
+              </div>
+            </div>
+            <div class="external-link">
+              <svg class="icon small"><use href="#icon-external-link"></use></svg>
+            </div>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="project-card" data-category="Product Marketing">
+          <div class="project-image">
+            <img src="https://images.pexels.com/photos/6476193/pexels-photo-6476193.jpeg" alt="Strategic Marketing & Brand Extension">
+            <span class="badge">Product Marketing</span>
+          </div>
+          <div class="project-content">
+            <h3>Strategic Marketing &amp; Brand Extension</h3>
+            <p>Created marketing campaign and brand extension strategy for brewery's seltzer drink through comprehensive market research.</p>
+            <div class="results-section">
+              <h4><svg class="icon small emerald"><use href="#icon-award"></use></svg> Key Results</h4>
+              <ul>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Increased sales for new product line</li>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Enhanced brand awareness in target market</li>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Successful product positioning strategy</li>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Effective audience resonance achieved</li>
+              </ul>
+            </div>
+            <div class="tech-section">
+              <h4>Skills &amp; Tools Utilized</h4>
+              <div class="tags">
+                <span>Market Research</span>
+                <span>Brand Extension</span>
+                <span>Consumer Analysis</span>
+                <span>Campaign Development</span>
+              </div>
+            </div>
+            <div class="external-link"><svg class="icon small"><use href="#icon-external-link"></use></svg></div>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="project-card" data-category="Business Development">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxtYXJrZXRpbmclMjBjYW1wYWlnbnxlbnwwfHx8fDE3NTU4NDY0MDV8MA&ixlib=rb-4.1.0&q=85" alt="Entrepreneurship Venture">
+            <span class="badge">Business Development</span>
+          </div>
+          <div class="project-content">
+            <h3>Entrepreneurship Venture</h3>
+            <p>Developed business concept for customized men's formal shoes prioritizing comfort and style through market gap analysis.</p>
+            <div class="results-section">
+              <h4><svg class="icon small emerald"><use href="#icon-award"></use></svg> Key Results</h4>
+              <ul>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Identified untapped market opportunity</li>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Created comprehensive business plan</li>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Developed unique value proposition</li>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Designed customer‑centric solution</li>
+              </ul>
+            </div>
+            <div class="tech-section">
+              <h4>Skills &amp; Tools Utilized</h4>
+              <div class="tags">
+                <span>Market Analysis</span>
+                <span>Business Planning</span>
+                <span>Product Development</span>
+                <span>Consumer Research</span>
+              </div>
+            </div>
+            <div class="external-link"><svg class="icon small"><use href="#icon-external-link"></use></svg></div>
+          </div>
+        </div>
+        <!-- Project 4 -->
+        <div class="project-card" data-category="Innovation">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxzdHJhdGVneSUyMGFuYWx5dGljc3xlbnwwfHx8fDE3NTU4ODYxOTB8MA&ixlib=rb-4.1.0&q=85" alt="Research & Development Initiative">
+            <span class="badge">Innovation</span>
+          </div>
+          <div class="project-content">
+            <h3>Research &amp; Development Initiative</h3>
+            <p>Led research project on carbon adsorbent development for CO2 capture using waste materials for environmental sustainability.</p>
+            <div class="results-section">
+              <h4><svg class="icon small emerald"><use href="#icon-award"></use></svg> Key Results</h4>
+              <ul>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Contributed to environmental sustainability research</li>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Developed cost‑effective solution approach</li>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Advanced knowledge in carbon capture technology</li>
+                <li><svg class="icon small emerald"><use href="#icon-arrow-trend-up"></use></svg> Published research findings</li>
+              </ul>
+            </div>
+            <div class="tech-section">
+              <h4>Skills &amp; Tools Utilized</h4>
+              <div class="tags">
+                <span>Research Methodology</span>
+                <span>Environmental Analysis</span>
+                <span>Technical Writing</span>
+                <span>Project Management</span>
+              </div>
+            </div>
+            <div class="external-link"><svg class="icon small"><use href="#icon-external-link"></use></svg></div>
+          </div>
+        </div>
+      </div>
+      <!-- Call to Action -->
+      <div class="projects-cta">
+        <h3>Ready to Drive Your Next Campaign?</h3>
+        <p>Let's collaborate to create data‑driven marketing strategies that deliver exceptional results and accelerate your business growth.</p>
+        <button data-target="contact" class="button button-primary">Start a Conversation</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="bg-particles">
+      <div class="floating-element floating-triangle float-2 emerald" style="top:12%; left:10%;"></div>
+      <div class="floating-element floating-circle float-4 blue" style="top:28%; right:15%; width:20px; height:20px;"></div>
+      <div class="floating-element floating-hexagon float-1 purple" style="bottom:25%; left:12%;"></div>
+      <div class="floating-element floating-square float-5 emerald" style="bottom:12%; right:10%; width:18px; height:18px;"></div>
+      <div class="floating-element floating-circle float-3 yellow" style="top:60%; left:85%; width:20px; height:20px;"></div>
+    </div>
+    <div class="container">
+      <h2 class="section-title">Get In <span>Touch</span></h2>
+      <p class="section-subtitle">Ready to take your marketing to the next level? Let's discuss how we can work together to achieve your business goals and drive exceptional results.</p>
+      <div class="contact-grid">
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <h3>Let's Start a Conversation</h3>
+          <p>I'm always excited to discuss new opportunities, collaborate on innovative projects, or share insights about marketing strategy and digital growth. Whether you're looking for a marketing professional or want to explore partnership opportunities, I'd love to hear from you.</p>
+          <div class="contact-cards">
+            <div class="contact-card">
+              <svg class="icon"><use href="#icon-envelope"></use></svg>
+              <div class="contact-details">
+                <div class="label">Email</div>
+                <a href="mailto:abhishekpathak1497@gmail.com">abhishekpathak1497@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-card">
+              <svg class="icon"><use href="#icon-phone"></use></svg>
+              <div class="contact-details">
+                <div class="label">Phone</div>
+                <a href="tel:+15874349045">+1&nbsp;(587)&nbsp;434‑9045</a>
+              </div>
+            </div>
+            <div class="contact-card">
+              <svg class="icon"><use href="#icon-location"></use></svg>
+              <div class="contact-details">
+                <div class="label">Location</div>
+                <div>Calgary (Open to relocate)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Contact Call to Action & Highlights -->
+        <div class="contact-actions">
+          <div class="cta-box">
+            <div class="cta-icon">
+              <svg class="icon"><use href="#icon-calendar"></use></svg>
+            </div>
+            <h4>Ready to Collaborate?</h4>
+            <p>I'm currently open to new opportunities and excited to bring my marketing expertise to forward‑thinking organizations.</p>
+            <button onclick="window.open('mailto:abhishekpathak1497@gmail.com?subject=Marketing Collaboration Opportunity', '_blank')" class="button button-primary" style="width:100%">Send Email</button>
+            <button onclick="window.open('tel:+15874349045','_blank')" class="button button-outline" style="width:100%">Call Now</button>
+          </div>
+          <div class="highlights-box">
+            <h4>What I Bring</h4>
+            <ul>
+              <li><span class="dot"></span>5+ years of proven marketing experience</li>
+              <li><span class="dot"></span>Data‑driven campaign optimization</li>
+              <li><span class="dot"></span>Cross‑functional team leadership</li>
+              <li><span class="dot"></span>Multi‑market experience (Canada &amp; India)</li>
+              <li><span class="dot"></span>Technical &amp; creative skill combination</li>
+              <li><span class="dot"></span>Results‑focused approach</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>Abhishek&nbsp;Pathak</h3>
+          <p>Marketing Strategist &amp; Digital Growth Expert</p>
+        </div>
+        <div class="footer-links">
+          <button data-target="home">Home</button>
+          <button data-target="about">About</button>
+          <button data-target="skills">Skills</button>
+          <button data-target="experience">Experience</button>
+          <button data-target="projects">Projects</button>
+          <button data-target="contact">Contact</button>
+        </div>
+        <div class="footer-back">
+          <button class="back-to-top">
+            <span>Back to Top</span>
+            <svg class="icon small"><use href="#icon-arrow-up"></use></svg>
+          </button>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <div>© <span id="currentYear"></span> Abhishek Pathak. All rights reserved.</div>
+        <div class="made-with">Made with <svg class="icon small red"><use href="#icon-heart"></use></svg> for marketing excellence</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
